@@ -1,7 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getMockTodoes } from '../../api/mock/todo';
+import { registration } from '../../api/auth/auth';
+import { LoginData } from './auth.types';
 
-export const register = createAsyncThunk('auth/registration', async () => {
-  const response = await getMockTodoes();
-  return response.data;
-});
+export const register = createAsyncThunk(
+  'auth/registration',
+  async ({ login, password }: LoginData) => {
+    const response = await registration(login, password);
+    return response.data;
+  }
+);
